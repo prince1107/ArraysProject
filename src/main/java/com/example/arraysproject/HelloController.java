@@ -97,6 +97,20 @@ public class HelloController {
         return average;
     }
 
+    protected double findAverage2(int[] tempArray){
+        double sum = 0;
+
+        for (int element:
+             tempArray) {
+            sum += element;
+        }
+
+        double length = tempArray.length;
+        double average = sum/length;
+
+        return average;
+    }
+
     @FXML
     public void mutateArray(){
 
