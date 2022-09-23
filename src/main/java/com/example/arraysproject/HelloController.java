@@ -78,11 +78,11 @@ public class HelloController {
         return max;
     }
 
-    protected int findMin(int[] tempArray){
+    protected int findMin(int[] tempArray) {
         int min = 500000;
 
-        for (int element:tempArray) {
-            if (element < min){
+        for (int element : tempArray) {
+            if (element < min) {
                 min = element;
             }
         }
@@ -90,20 +90,14 @@ public class HelloController {
     }
 
     protected double findAverage(int[] tempArray){
-        double sum = Arrays.stream(tempArray).sum();
-        double length = tempArray.length;
-        double average = sum/length;
-
-        return average;
-    }
-
-    protected double findAverage2(int[] tempArray){
         double sum = 0;
 
         for (int element:
              tempArray) {
             sum += element;
         }
+
+//        double sum = Arrays.stream(tempArray).sum();
 
         double length = tempArray.length;
         double average = sum/length;
