@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.math.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class HelloController {
@@ -26,6 +27,7 @@ public class HelloController {
         findNumInArray();
         arrayMaxMinAvg();
         rollXDiceYTimes();
+        translateAlphabet();
     }
 
     @FXML
@@ -103,7 +105,7 @@ public class HelloController {
     @FXML
     protected void rollXDiceYTimes(){
         int x = 2;
-        int y = 20;
+        int y = 20000000;
 
         int numFrequencies = x*6 - (x-1);
         int[] frequencies = new int[numFrequencies];
@@ -116,11 +118,65 @@ public class HelloController {
             for (int j = 0; j < x; j++){
                 temp += (int) Math.round(Math.random()*5) + 1;
             }
-            frequencies[temp - (x-1)]++;
+            frequencies[temp - x]++;
         }
 
-        result += "Array: " + Arrays.toString(frequencies) + "; ";
+        result += "Array: " + Arrays.toString(frequencies) + ";";
 
         System.out.println(result);
+    }
+
+    @FXML
+    protected void shuffleArray(){
+
+    }
+
+    @FXML
+    protected void translateAlphabet(){
+        ArrayList<Character> alphabet = new ArrayList<Character>();
+        int translation = -5;
+
+        String result = "";
+
+        for (int i = 0; i < 26; i++){
+            alphabet.add((char) (65 + i));
+        }
+
+        result += "Array: " + alphabet + ";";
+
+        System.out.println(result);
+
+        result = "";
+
+        if (translation > 0) {
+            for (int i = 0; i < translation; i++) {
+                alphabet.add(0,alphabet.remove(alphabet.size()-1));;
+            }
+        } else if (translation < 0) {
+            for (int i = 0; i < translation * -1; i++) {
+                alphabet.add(alphabet.remove(0));;
+            }
+        } else{
+            System.out.println("Don't input 0");
+        }
+
+        result += "Array: " + alphabet + ";";
+
+        System.out.println(result);
+    }
+
+    @FXML
+    protected void pascalsTriangle(){
+
+    }
+
+    @FXML
+    protected void searchArray(){
+
+    }
+
+    @FXML
+    protected void lockerSimulation(){
+
     }
 }
