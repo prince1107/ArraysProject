@@ -5,7 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.math.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,11 +26,16 @@ public class HelloController {
     private Label resultLabel;
 
     @FXML
-    public void onHelloButtonClick() {
+    public void onHelloButtonClick() throws IOException {
         findNumInArray();
         arrayMaxMinAvg();
+        mutateArray();
         rollXDiceYTimes();
+        shuffleArray();
         translateAlphabet();
+//        pascalsTriangle();
+        searchArray();
+//        lockerSimulation();
     }
 
     @FXML
@@ -107,12 +115,27 @@ public class HelloController {
 
     @FXML
     public void mutateArray(){
+        int function = 1;
+        int index = 5;
+        int num = 5;
 
+        int[] array = {0,1,2,3,4,7,6,7,8,9,10};
+        int[] finalArray = new int[array.length + 1];
+
+        if (function == 0) {
+            System.arraycopy(array, 0, finalArray, 0, array.length);
+            finalArray[finalArray.length-1] = num;
+            System.out.println(Arrays.toString(finalArray));
+        } else if (function == 1) {
+            System.out.println(Arrays.toString(array));
+            array[index] = num;
+            System.out.println(Arrays.toString(array));
+        }
     }
 
     @FXML
     protected void rollXDiceYTimes(){
-        int x = 2;
+        int x = 1;
         int y = 20000000;
 
         int numFrequencies = x*6 - (x-1);
@@ -132,11 +155,41 @@ public class HelloController {
         result += "Array: " + Arrays.toString(frequencies) + ";";
 
         System.out.println(result);
+
+        String[] resultArray = new String[frequencies.length];
+
+        for (int i = 0; i < resultArray.length; i++){
+            resultArray[i] = "Frequency of " + (i + x) + ": " + frequencies[i];
+        }
+
+        result = "";
+
+        result += "resultArray: " + Arrays.toString(resultArray) + ";";
+
+        System.out.println(result);
     }
 
     @FXML
     protected void shuffleArray(){
+        ArrayList<Integer> array = new ArrayList<Integer>();
+        ArrayList<Integer> array2 = new ArrayList<Integer>();
 
+        for (int i = 0; i <= 20; i++){
+            array.add(i);
+        }
+        System.out.println(array);
+
+        for (int i = 0; i <= array.size(); i++){
+            array.add(array.remove((int) (Math.random()*array.size())));
+        }
+        System.out.println("Shuffle 1: " + array);
+
+        int iterations = array.size();
+
+        for (int i = 0; i < iterations; i++){
+            array2.add(array.remove((int) (Math.random()*array.size())));
+        }
+        System.out.println("Shuffle 2: " + array2);
     }
 
     @FXML
@@ -158,11 +211,11 @@ public class HelloController {
 
         if (translation > 0) {
             for (int i = 0; i < translation; i++) {
-                alphabet.add(0,alphabet.remove(alphabet.size()-1));;
+                alphabet.add(0,alphabet.remove(alphabet.size()-1));
             }
         } else if (translation < 0) {
             for (int i = 0; i < translation * -1; i++) {
-                alphabet.add(alphabet.remove(0));;
+                alphabet.add(alphabet.remove(0));
             }
         } else{
             System.out.println("Don't input 0");
@@ -175,12 +228,59 @@ public class HelloController {
 
     @FXML
     protected void pascalsTriangle(){
+        int numRows = 1;
 
+        String[] results = new String[numRows];
+        String temp = "";
+
+        ArrayList<Integer> tempArray = new ArrayList<Integer>();
+        ArrayList<Integer> tempArray2 = new ArrayList<Integer>();
+
+        if (numRows >= 1){
+            results[0] = String.valueOf(1);
+            if (numRows >= 2){
+                results[1] = 1 + " " + 1;
+                if (numRows >= 3){
+                    tempArray.add(1);
+                    tempArray.add(1);
+                    for (int i = 1; i < numRows - 2; i++){
+                        tempArray2.clear();
+                        tempArray2.add(1);
+                        for (int j = 0; j < tempArray.size() - 2; j++){
+                            tempArray2.add(tempArray.get(i)+tempArray.get(i+1));
+                        }
+                        tempArray2.add(1);
+                        tempArray = tempArray2;
+
+                        temp = "";
+
+                        for (int element: tempArray){
+                            temp += element + " ";
+                        }
+
+                        results[i+2] = temp;
+                    }
+                }
+            }
+        }
     }
 
     @FXML
-    protected void searchArray(){
+    protected void searchArray() throws IOException {
+        String input = "zaba";
 
+        File file = new File("/Volumes/AYUSH DRIVE/School 2022-23/M359 AP CS Java A/Projects/ArraysProject/src/main/java/com/example/arraysproject/words_alpha.txt");
+        ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(file.toPath(), Charset.forName("UTF-8"));
+
+        ArrayList <String> results = new ArrayList<>();
+
+        for (String element: lines) {
+            if (element.contains(input)){
+                results.add(element);
+            }
+        }
+
+        System.out.println(results);
     }
 
     @FXML
