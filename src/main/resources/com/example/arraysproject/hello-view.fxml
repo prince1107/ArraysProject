@@ -1,16 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.arraysproject.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.arraysproject.HelloController">
+   <children>
+      <Label fx:id="welcomeText" alignment="CENTER" layoutX="150.0" layoutY="10.0" prefHeight="100.0" prefWidth="300.0" text="Welcome to Ayush's Loops Project" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="button1" alignment="CENTER" layoutX="50.0" layoutY="110.0" mnemonicParsing="false" onAction="#findNumInArray" prefHeight="40.0" prefWidth="200.0" text="Find # in Array" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="button2" alignment="CENTER" layoutX="50.0" layoutY="155.0" mnemonicParsing="false" onAction="#arrayMaxMinAvg" prefHeight="40.0" prefWidth="200.0" text="Array MaxMinAvg" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="button3" alignment="CENTER" layoutX="50.0" layoutY="200.0" mnemonicParsing="false" onAction="#mutateArray" prefHeight="40.0" prefWidth="200.0" text="Mutate Array" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="button4" alignment="CENTER" layoutX="50.0" layoutY="245.0" mnemonicParsing="false" onAction="#rollXDiceYTimes" prefHeight="40.0" prefWidth="200.0" text="Roll X Dice Y Times" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="button5" alignment="CENTER" layoutX="50.0" layoutY="290.0" mnemonicParsing="false" onAction="#shuffleArray" prefHeight="40.0" prefWidth="200.0" text="Shuffle Array" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="button6" alignment="CENTER" layoutX="50.0" layoutY="335.0" mnemonicParsing="false" onAction="#translateAlphabet" prefHeight="40.0" prefWidth="200.0" text="Translate Alphabet" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="button7" alignment="CENTER" layoutX="50.0" layoutY="380.0" mnemonicParsing="false" onAction="#pascalsTriangle" prefHeight="40.0" prefWidth="200.0" text="Pascal's Triangle" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="button9" alignment="CENTER" layoutX="50.0" layoutY="470.0" mnemonicParsing="false" onAction="#lockerSimulation" prefHeight="40.0" prefWidth="200.0" text="Locker Simulation" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="button10" alignment="CENTER" layoutX="50.0" layoutY="515.0" mnemonicParsing="false" onAction="#rainAccumumulation" prefHeight="40.0" prefWidth="200.0" text="Rain Simulation" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="button8" alignment="CENTER" layoutX="50.0" layoutY="425.0" mnemonicParsing="false" onAction="#searchArray" prefHeight="40.0" prefWidth="200.0" text="Search up a word" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="resultLabel" alignment="CENTER" layoutX="350.0" layoutY="275.0" prefHeight="100.0" prefWidth="200.0" text="Result:" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="293.0" layoutY="110.0" orientation="VERTICAL" prefHeight="470.0" prefWidth="12.0" />
+      <TextField fx:id="input1" alignment="CENTER" layoutX="350.0" layoutY="125.0" prefHeight="50.0" prefWidth="200.0" promptText="Input 1" />
+      <TextField fx:id="input2" alignment="CENTER" layoutX="350.0" layoutY="200.0" prefHeight="50.0" prefWidth="200.0" promptText="Input 2" />
+      <ListView fx:id="resultView" layoutX="350.0" layoutY="400.0" prefHeight="150.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

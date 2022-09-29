@@ -3,21 +3,22 @@ package com.example.arraysproject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class HelloController {
     @FXML
     private Label welcomeText;
 
     @FXML
-    private Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15;
+    private Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button10;
 
     @FXML
     private TextField input1, input2;
@@ -26,28 +27,38 @@ public class HelloController {
     private Label resultLabel;
 
     @FXML
-    public void onHelloButtonClick() throws IOException {
-        findNumInArray();
-        arrayMaxMinAvg();
-        mutateArray();
-        rollXDiceYTimes();
-        shuffleArray();
-        translateAlphabet();
+    private ListView resultView;
+
+//    @FXML
+//    public void onHelloButtonClick() throws IOException {
+//        findNumInArray();
+//        arrayMaxMinAvg();
+//        mutateArray();
+//        rollXDiceYTimes();
+//        shuffleArray();
+//        translateAlphabet();
 //        pascalsTriangle();
-        searchArray();
+//        searchArray();
 //        lockerSimulation();
-    }
+//        rainAccumumulation();
+//    }
 
     @FXML
     public void findNumInArray(){
         int num = 5;
-        int[] array = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
-        int[] array2 = {1,4,2,3,5,5,3,80,1,2,3,5,3,4,5,6,7,4,3,6,20,78,45};
+        int[] array = new int[(int) (Math.random() * 11 + 10)];
+
+        for (int element:
+             array) {
+            element = (int) (Math.random()*50);
+        }
+        System.out.println(Arrays.toString(array));
+
         String positions = "Positions: ";
         int count = 0;
 
-        for (int i = 0; i < array2.length; i++){
-            if (array2[i] == num){
+        for (int i = 0; i < array.length; i++){
+            if (array[i] == num){
                 positions += i + ", ";
                 count++;
             }
@@ -180,7 +191,7 @@ public class HelloController {
         System.out.println(array);
 
         for (int i = 0; i <= array.size(); i++){
-            array.add(array.remove((int) (Math.random()*array.size())));
+            array.add((int) (Math.random()*array.size()), array.remove((int) (Math.random()*array.size())));
         }
         System.out.println("Shuffle 1: " + array);
 
@@ -228,10 +239,10 @@ public class HelloController {
 
     @FXML
     protected void pascalsTriangle(){
-        int numRows = 1;
+        int numRows = 10;
 
         String[] results = new String[numRows];
-        String temp = "";
+        String temp;
 
         ArrayList<Integer> tempArray = new ArrayList<Integer>();
         ArrayList<Integer> tempArray2 = new ArrayList<Integer>();
@@ -243,18 +254,23 @@ public class HelloController {
                 if (numRows >= 3){
                     tempArray.add(1);
                     tempArray.add(1);
-                    for (int i = 1; i < numRows - 2; i++){
+                    for (int i = 0; i < numRows - 2; i++){
                         tempArray2.clear();
                         tempArray2.add(1);
-                        for (int j = 0; j < tempArray.size() - 2; j++){
-                            tempArray2.add(tempArray.get(i)+tempArray.get(i+1));
+                        for (int j = 0; j <= tempArray.size() - 2; j++){
+                            tempArray2.add(tempArray.get(j)+tempArray.get(j+1));
                         }
                         tempArray2.add(1);
-                        tempArray = tempArray2;
+                        System.out.println(tempArray2);
+                        tempArray.clear();
+                        for (int value : tempArray2) {
+                            tempArray.add(value);
+                        }
+                        System.out.println(tempArray);
 
                         temp = "";
 
-                        for (int element: tempArray){
+                        for (int element: tempArray2){
                             temp += element + " ";
                         }
 
@@ -263,14 +279,28 @@ public class HelloController {
                 }
             }
         }
+        System.out.println("Results: " + Arrays.toString(results));
     }
 
     @FXML
     protected void searchArray() throws IOException {
-        String input = "zaba";
 
-        File file = new File("/Volumes/AYUSH DRIVE/School 2022-23/M359 AP CS Java A/Projects/ArraysProject/src/main/java/com/example/arraysproject/words_alpha.txt");
-        ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(file.toPath(), Charset.forName("UTF-8"));
+        ArrayList<String> lines = new ArrayList<>();
+
+        try{
+            FileReader reader = new FileReader("src/main/resources/words_alpha.txt");
+            Scanner in = new Scanner(reader);
+
+            while(in.hasNext()){
+                lines.add(in.next());
+            }
+
+        } catch (FileNotFoundException ex){
+            System.out.println("Something is very wrong");
+        }
+
+
+        String input = "a";
 
         ArrayList <String> results = new ArrayList<>();
 
@@ -285,6 +315,65 @@ public class HelloController {
 
     @FXML
     protected void lockerSimulation(){
+        boolean[] lockers = new boolean[100];
+        int numtimes = 100;
 
+        for (int e = 0; e < lockers.length; e++) {
+            lockers[e] = true;
+        }
+
+        System.out.println(Arrays.toString(lockers));
+
+        for (int i = 1; i <= numtimes; i++){
+            for (int j = 0; j < 100; j++){
+                if(((j+1) % i) == 0) {
+                    if (lockers[j] == true){
+                        lockers[j] = false;
+                    } else {
+                        lockers[j] = true;
+                    }
+                } else {
+
+                }
+            }
+        }
+
+        String result = "";
+
+        for (int m = 0; m < 100; m++){
+            if (!lockers[m]){
+                result += (m + 1) + ", ";
+            }
+        }
+
+        System.out.println(Arrays.toString(lockers));
+        System.out.println(result);
     }
+
+    @FXML
+    protected void rainAccumumulation(){
+        int[] array = {5, 3, 0, 3, 1};
+
+        int water = 0;
+
+        for (int i = 1; i < array.length - 1; i++){
+            int maxL = array[i];
+            int maxR = array[i];
+            for (int l = 0; l < i; l++){
+                if (array[l] > maxL){
+                    maxL = array[l];
+                }
+            }
+            for (int r = array.length-1; r > i; r--){
+                if (array[r] > maxR){
+                    maxR = array[r];
+                }
+            }
+
+            water += Math.min(maxL, maxR) - array[i];
+        }
+        System.out.println(water);
+    }
+
+
 }
